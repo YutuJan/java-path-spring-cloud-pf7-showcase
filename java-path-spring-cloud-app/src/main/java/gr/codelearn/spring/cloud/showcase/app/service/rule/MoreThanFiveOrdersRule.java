@@ -21,9 +21,4 @@ public class MoreThanFiveOrdersRule implements Rule<Order> {
 
 		return orderCount > 5;
 	}
-
-	@Override
-	public Long getPriority() {
-		return 1L;
-	}
 }
