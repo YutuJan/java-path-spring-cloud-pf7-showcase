@@ -13,7 +13,7 @@
 
 		<!-- Rolling Random Access File Appender with a default buffer of 256 * 1024 bytes -->
 		<RollingRandomAccessFile name="RollingRandomAccessFileAppender"
-								 fileName="logs/java-path-spring-core.log"
+								 fileName="logs/java-path-spring-catalog.log"
 								 filePattern="logs/java-path-spring-core-%d{yyyy-MM-dd}.zip">
 			<PatternLayout>
 				<Pattern>${LOG_PATTERN}</Pattern>
@@ -29,7 +29,7 @@
 		</RollingRandomAccessFile>
 		<!-- Rolling Random Access File Appender with a default buffer of 256 * 1024 bytes -->
 		<RollingRandomAccessFile name="SqlCommandRollingRandomAccessFileAppender"
-								 fileName="logs/java-path-spring-core-sql.log"
+								 fileName="logs/java-path-spring-catalog-sql.log"
 								 filePattern="logs/java-path-spring-core-sql%d{yyyy-MM-dd}.zip">
 			<PatternLayout>
 				<Pattern>${LOG_PATTERN}</Pattern>
