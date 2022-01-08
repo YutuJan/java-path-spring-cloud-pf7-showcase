@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl extends AbstractServiceImpl<Product> implements ProductService {
+public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService {
 	private final ProductRepository productRepository;
 
 	@Override

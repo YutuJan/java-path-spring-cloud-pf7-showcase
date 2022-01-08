@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerServiceImpl extends AbstractServiceImpl<Customer> implements CustomerService {
+public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements CustomerService {
 	private final CustomerRepository customerRepository;
 
 	@Override

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class OrderServiceImpl extends AbstractServiceImpl<Order> implements OrderService {
+public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderService {
 	private final LoyaltyService loyaltyService;
 	private final OrderRepository orderRepository;
 

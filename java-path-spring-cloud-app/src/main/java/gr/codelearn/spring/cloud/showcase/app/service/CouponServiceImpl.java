@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CouponServiceImpl extends AbstractServiceImpl<Coupon> implements CouponService {
+public class CouponServiceImpl extends BaseServiceImpl<Coupon> implements CouponService {
 	private final CouponRepository couponRepository;
 
 	@Override
