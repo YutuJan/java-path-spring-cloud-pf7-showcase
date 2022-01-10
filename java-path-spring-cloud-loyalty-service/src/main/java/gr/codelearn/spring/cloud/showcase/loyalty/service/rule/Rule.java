@@ -1,6 +1,4 @@
-package gr.codelearn.spring.cloud.showcase.app.service.rule;
-
-import gr.codelearn.spring.cloud.showcase.app.domain.BaseEntity;
+package gr.codelearn.spring.cloud.showcase.loyalty.service.rule;
 
 import java.math.BigDecimal;
 

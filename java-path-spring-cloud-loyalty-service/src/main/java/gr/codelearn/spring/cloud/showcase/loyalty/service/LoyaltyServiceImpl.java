@@ -1,9 +1,8 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.loyalty.service;
 
 import gr.codelearn.spring.cloud.showcase.app.base.AbstractLogComponent;
-import gr.codelearn.spring.cloud.showcase.app.domain.Coupon;
-import gr.codelearn.spring.cloud.showcase.app.domain.Order;
-import gr.codelearn.spring.cloud.showcase.app.service.rule.Rule;
+import gr.codelearn.spring.cloud.showcase.loyalty.domain.Coupon;
+import gr.codelearn.spring.cloud.showcase.loyalty.service.rule.Rule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
