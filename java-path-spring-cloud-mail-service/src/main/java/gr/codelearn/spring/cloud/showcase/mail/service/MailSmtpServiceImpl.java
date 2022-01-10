@@ -1,8 +1,8 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.mail.service;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import gr.codelearn.spring.cloud.showcase.app.base.AbstractLogComponent;
+import gr.codelearn.spring.cloud.showcase.core.base.AbstractLogComponent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;

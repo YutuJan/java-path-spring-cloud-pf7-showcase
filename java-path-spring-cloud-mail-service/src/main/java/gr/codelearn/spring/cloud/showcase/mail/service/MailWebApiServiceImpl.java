@@ -1,4 +1,4 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.mail.service;
 
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -6,7 +6,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-import gr.codelearn.spring.cloud.showcase.app.base.AbstractLogComponent;
+import gr.codelearn.spring.cloud.showcase.core.base.AbstractLogComponent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;

@@ -1,7 +1,7 @@
-package gr.codelearn.spring.cloud.showcase.app.bootstrap;
+package gr.codelearn.spring.cloud.showcase.mail.bootstrap;
 
-import gr.codelearn.spring.cloud.showcase.app.base.AbstractLogComponent;
-import gr.codelearn.spring.cloud.showcase.app.service.MailService;
+import gr.codelearn.spring.cloud.showcase.core.base.AbstractLogComponent;
+import gr.codelearn.spring.cloud.showcase.mail.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -15,10 +15,9 @@ public class SampleMailRunner extends AbstractLogComponent implements CommandLin
 
 	@Override
 	public void run(String... args) throws Exception {
-		mailService.sendEmail("costas.giannacoulis@gmail.com", "First sample subject",
-							  "Hello from a sample <b>Spring Boot</b>.");
+		mailService.sendEmail("username@gmail.com", "First sample subject", "Hello from a sample <b>Spring Boot</b>.");
 
-		mailService.sendEmail("costas.giannacoulis@gmail.com", "Second sample subject",
+		mailService.sendEmail("username@gmail.com", "Second sample subject",
 							  "<p>Hello from a sample <b>Spring Boot</b>.</p><p>Thank you</p>");
 	}
 }
