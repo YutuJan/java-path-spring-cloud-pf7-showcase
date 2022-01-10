@@ -2,6 +2,7 @@ package gr.codelearn.spring.cloud.showcase.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gr.codelearn.spring.cloud.showcase.core.domain.BaseModel;
+import gr.codelearn.spring.cloud.showcase.core.domain.CustomerCategory;
 import gr.codelearn.spring.cloud.showcase.core.domain.PaymentMethod;
 import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,6 @@ import java.util.Set;
 				)
 		)
 })
-
 //@formatter:on
 
 @Entity
@@ -59,8 +59,14 @@ public class Order extends BaseModel {
 		boolean remove(OrderItem orderItem);
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private Customer customer;
+	@NotNull
+	@Column(length = 50, nullable = false, unique = true)
+	private String email;
+
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	@Column(length = 10, nullable = false)
+	private CustomerCategory customerCategory;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
