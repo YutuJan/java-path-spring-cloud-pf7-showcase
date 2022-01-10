@@ -1,8 +1,7 @@
-package gr.codelearn.spring.cloud.showcase.app.repository;
+package gr.codelearn.spring.cloud.showcase.customer.repository;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Customer;
-import gr.codelearn.spring.cloud.showcase.app.transfer.KeyValue;
-import gr.codelearn.spring.cloud.showcase.app.transfer.PurchasesPerCustomerCategoryDto;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.customer.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

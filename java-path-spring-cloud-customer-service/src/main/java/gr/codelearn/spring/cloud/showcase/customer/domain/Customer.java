@@ -1,7 +1,9 @@
-package gr.codelearn.spring.cloud.showcase.app.domain;
+package gr.codelearn.spring.cloud.showcase.customer.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import gr.codelearn.spring.cloud.showcase.app.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.core.domain.BaseModel;
+import gr.codelearn.spring.cloud.showcase.core.domain.CustomerCategory;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,7 +49,7 @@ import java.math.BigDecimal;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Customer extends BaseEntity {
+public class Customer extends BaseModel {
 	@NotNull
 	@Column(length = 50, nullable = false, unique = true)
 	private String email;

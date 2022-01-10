@@ -1,9 +1,9 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.customer.service;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Customer;
-import gr.codelearn.spring.cloud.showcase.app.repository.CustomerRepository;
-import gr.codelearn.spring.cloud.showcase.app.transfer.KeyValue;
-import gr.codelearn.spring.cloud.showcase.app.transfer.PurchasesPerCustomerCategoryDto;
+import gr.codelearn.spring.cloud.showcase.core.service.BaseServiceImpl;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.customer.domain.Customer;
+import gr.codelearn.spring.cloud.showcase.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

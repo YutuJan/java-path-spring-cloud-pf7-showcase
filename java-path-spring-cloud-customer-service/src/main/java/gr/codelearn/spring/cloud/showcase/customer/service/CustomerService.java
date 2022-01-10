@@ -1,8 +1,8 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.customer.service;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Customer;
-import gr.codelearn.spring.cloud.showcase.app.transfer.KeyValue;
-import gr.codelearn.spring.cloud.showcase.app.transfer.PurchasesPerCustomerCategoryDto;
+import gr.codelearn.spring.cloud.showcase.core.service.BaseService;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.customer.domain.Customer;
 
 import java.math.BigDecimal;
 import java.util.List;
