@@ -1,3 +1,5 @@
+server:
+  port: 10000
 spring:
   data:
     jpa:
@@ -24,7 +26,7 @@ spring:
     # .sql) and DML (data.sql) scripts.
     password: sa
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:~/pf7-microservices/catalog;IFEXISTS=FALSE;AUTO_SERVER=TRUE;
+    url: jdbc:h2:file:~/.h2/pf7-microservices/catalog;IFEXISTS=FALSE;AUTO_SERVER=TRUE;
     username: sa
   h2:
     console:
