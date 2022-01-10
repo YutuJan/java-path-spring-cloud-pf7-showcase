@@ -3,8 +3,8 @@ package gr.codelearn.spring.cloud.showcase.loyalty.service;
 import gr.codelearn.spring.cloud.showcase.core.service.BaseServiceImpl;
 import gr.codelearn.spring.cloud.showcase.loyalty.domain.Coupon;
 import gr.codelearn.spring.cloud.showcase.loyalty.repository.CouponRepository;
+import gr.codelearn.spring.cloud.showcase.loyalty.service.rule.Rule;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.digester.Rule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
