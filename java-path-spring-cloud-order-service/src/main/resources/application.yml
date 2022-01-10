@@ -1,3 +1,5 @@
+server:
+  port: 10400
 spring:
   data:
     jpa:
@@ -20,11 +22,7 @@ spring:
         cachePrepStmts: true
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
-    # Mode to apply when determining if DataSource initialization should be performed using the available DDL (schema
-    # .sql) and DML (data.sql) scripts.
-    initialization-mode: never
     password: sa
-    platform: h2
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:file:~/eshop-app;IFEXISTS=FALSE;AUTO_SERVER=TRUE;
     username: sa
@@ -75,3 +73,9 @@ spring:
         name: Constantinos Giannacoulis
     protocol: smtp
     test-connection: false
+  sql:
+    init:
+      # Mode to apply when determining if DataSource initialization should be performed using the available DDL (schema
+      # .sql) and DML (data.sql) scripts.
+      mode: never
+      platform: h2

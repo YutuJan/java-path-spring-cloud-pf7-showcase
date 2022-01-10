@@ -1,6 +1,6 @@
-package gr.codelearn.spring.cloud.showcase.app.repository;
+package gr.codelearn.spring.cloud.showcase.order.repository;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Order;
+import gr.codelearn.spring.cloud.showcase.order.domain.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,8 @@
-package gr.codelearn.spring.cloud.showcase.app.repository;
+package gr.codelearn.spring.cloud.showcase.order.repository;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Order;
-import gr.codelearn.spring.cloud.showcase.app.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
+import gr.codelearn.spring.cloud.showcase.order.domain.Order;
+import gr.codelearn.spring.cloud.showcase.order.transfer.PurchasesPerCustomerCategoryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,13 @@ public interface OrderReportRepository extends JpaRepository<Order, Long> {
 	@Query("select count(o) from Order o inner join Customer c on o.customer = c.id where c.email = ?1 and o" +
 			".couponCode is not null")
 	Long countByCouponCodeIsNotNullAndCustomer(String email);
+
+	@Query()
+	List<KeyValue<String, Integer>> findProductSaleFrequency();
+
+	@Query(name = "Order.mostExpensiveProductPurchases", nativeQuery = true)
+	List<KeyValue<String, BigDecimal>> findCustomersPurchasedMostExpensiveProduct();
+
+	@Query(nativeQuery = true)
+	List<PurchasesPerCustomerCategoryDto> findTotalNumberAndCostOfPurchasesPerCustomerCategory();
 }

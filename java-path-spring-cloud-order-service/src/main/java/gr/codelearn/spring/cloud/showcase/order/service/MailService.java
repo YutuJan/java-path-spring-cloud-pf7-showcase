@@ -1,4 +1,4 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.order.service;
 
 import java.io.IOException;
 

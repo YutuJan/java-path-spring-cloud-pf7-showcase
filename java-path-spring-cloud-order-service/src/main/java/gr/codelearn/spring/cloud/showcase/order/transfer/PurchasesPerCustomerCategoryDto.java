@@ -1,4 +1,4 @@
-package gr.codelearn.spring.cloud.showcase.app.transfer;
+package gr.codelearn.spring.cloud.showcase.order.transfer;
 
 import java.math.BigDecimal;
 

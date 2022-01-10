@@ -1,6 +1,9 @@
-package gr.codelearn.spring.cloud.showcase.app.domain;
+package gr.codelearn.spring.cloud.showcase.order.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import gr.codelearn.spring.cloud.showcase.core.domain.BaseModel;
+import gr.codelearn.spring.cloud.showcase.core.domain.PaymentMethod;
+import gr.codelearn.spring.cloud.showcase.core.transfer.KeyValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +19,30 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+//@formatter:off
+@NamedNativeQuery(name = "Order.mostExpensiveProductPurchases",
+		query =	"SELECT C.FIRSTNAME || ' ' || C.LASTNAME as fullname, COUNT(*) as purchases " +
+				"FROM ORDERS O, ORDER_ITEMS OI, CUSTOMERS C " +
+				"WHERE OI.ORDER_ID = O.ID " +
+				"AND O.CUSTOMER_ID = C.ID " +
+				"AND OI.PRODUCT_ID = (SELECT TOP 1 ID FROM PRODUCTS ORDER BY PRICE DESC) " +
+				"GROUP BY O.CUSTOMER_ID " +
+				"ORDER BY purchases, c.lastname, c.firstname",
+		resultSetMapping = "customerMostExpensiveProductPurchases")
+@SqlResultSetMappings({
+		@SqlResultSetMapping(name="customerMostExpensiveProductPurchases",
+				classes = @ConstructorResult(
+						targetClass = KeyValue.class,
+						columns = {
+								@ColumnResult(name="fullname", type = String.class),
+								@ColumnResult(name="purchases", type = BigDecimal.class)
+						}
+				)
+		)
+})
+
+//@formatter:on
+
 @Entity
 @Table(name = "ORDERS")
 @SequenceGenerator(name = "idGenerator", sequenceName = "ORDERS_SEQ", initialValue = 1, allocationSize = 1)
@@ -25,7 +52,7 @@ import java.util.Set;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Order extends BaseEntity {
+public class Order extends BaseModel {
 	private interface MyDelegate {
 		boolean add(OrderItem orderItem);
 

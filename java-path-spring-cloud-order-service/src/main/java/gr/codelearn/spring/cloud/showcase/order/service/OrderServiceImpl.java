@@ -1,12 +1,11 @@
-package gr.codelearn.spring.cloud.showcase.app.service;
+package gr.codelearn.spring.cloud.showcase.order.service;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Coupon;
-import gr.codelearn.spring.cloud.showcase.app.domain.Customer;
-import gr.codelearn.spring.cloud.showcase.app.domain.Order;
-import gr.codelearn.spring.cloud.showcase.app.domain.OrderItem;
-import gr.codelearn.spring.cloud.showcase.app.domain.PaymentMethod;
-import gr.codelearn.spring.cloud.showcase.app.domain.Product;
-import gr.codelearn.spring.cloud.showcase.app.repository.OrderRepository;
+import gr.codelearn.spring.cloud.showcase.core.domain.PaymentMethod;
+import gr.codelearn.spring.cloud.showcase.core.service.BaseServiceImpl;
+import gr.codelearn.spring.cloud.showcase.order.domain.Coupon;
+import gr.codelearn.spring.cloud.showcase.order.domain.Order;
+import gr.codelearn.spring.cloud.showcase.order.domain.OrderItem;
+import gr.codelearn.spring.cloud.showcase.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

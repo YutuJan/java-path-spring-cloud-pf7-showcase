@@ -1,7 +1,7 @@
-package gr.codelearn.spring.cloud.showcase.app.service.rule;
+package gr.codelearn.spring.cloud.showcase.order.service.rule;
 
-import gr.codelearn.spring.cloud.showcase.app.domain.Order;
-import gr.codelearn.spring.cloud.showcase.app.service.OrderReportService;
+import gr.codelearn.spring.cloud.showcase.order.domain.Order;
+import gr.codelearn.spring.cloud.showcase.order.service.OrderReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

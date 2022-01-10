@@ -1,4 +1,4 @@
-package gr.codelearn.spring.cloud.showcase.app.service.rule;
+package gr.codelearn.spring.cloud.showcase.order.service.rule;
 
 import gr.codelearn.spring.cloud.showcase.app.domain.BaseEntity;
 
