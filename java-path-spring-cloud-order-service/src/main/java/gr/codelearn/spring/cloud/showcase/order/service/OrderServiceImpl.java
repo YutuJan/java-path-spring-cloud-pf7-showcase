@@ -7,7 +7,9 @@ import gr.codelearn.spring.cloud.showcase.core.transfer.resource.CustomerResourc
 import gr.codelearn.spring.cloud.showcase.core.transfer.resource.ProductResource;
 import gr.codelearn.spring.cloud.showcase.order.domain.Order;
 import gr.codelearn.spring.cloud.showcase.order.domain.OrderItem;
+import gr.codelearn.spring.cloud.showcase.order.mapper.OrderMapper;
 import gr.codelearn.spring.cloud.showcase.order.repository.OrderRepository;
+import gr.codelearn.spring.cloud.showcase.order.service.client.LoyaltyServiceClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,14 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderService {
-	private final LoyaltyService loyaltyService;
+	private final LoyaltyServiceClient loyaltyServiceClient;
 	private final OrderRepository orderRepository;
+	private final OrderMapper orderMapper;
 
 	@Override
 	public JpaRepository<Order, Long> getRepository() {
@@ -116,16 +119,17 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 		order.setSubmitDate(new Date());
 
 		//Check for potential loyalty actions
-		var coupon = loyaltyService.apply(order);
+		var coupon = Objects.requireNonNull(loyaltyServiceClient.apply(orderMapper.toResource(order)).getBody()
+													.getData());
 
 		order.setCost(giveDiscount(order, coupon));
-		if (coupon.isPresent()) {
-			order.setCouponCode(coupon.get().getCode());
+		if (coupon != null) {
+			order.setCouponCode(coupon.getCode());
 		}
 
 		var savedOrder = save(order);
-		if (coupon.isPresent()) {
-			loyaltyService.declare(coupon.get());
+		if (coupon != null) {
+			loyaltyServiceClient.declare(coupon);
 		}
 		return savedOrder;
 	}
@@ -135,13 +139,13 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 				order.getCustomerCategory() != null;
 	}
 
-	private BigDecimal giveDiscount(Order order, Optional<CouponResource> coupon) {
+	private BigDecimal giveDiscount(Order order, CouponResource coupon) {
 		var totalDiscountPercent = order.getCustomerCategory().getDiscount() + order.getPaymentMethod().getDiscount();
 		var explicitDiscountAmount = BigDecimal.ZERO;
 
-		if (coupon.isPresent()) {
-			totalDiscountPercent += coupon.get().getDiscountPercent();
-			explicitDiscountAmount = coupon.get().getDiscountAmount();
+		if (coupon != null) {
+			totalDiscountPercent += coupon.getDiscountPercent();
+			explicitDiscountAmount = coupon.getDiscountAmount();
 		}
 
 		//@formatter:off
