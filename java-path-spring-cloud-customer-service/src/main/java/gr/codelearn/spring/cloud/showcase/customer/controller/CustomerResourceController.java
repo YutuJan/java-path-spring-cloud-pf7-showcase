@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/customers")
-public class CustomerController extends AbstractController<Customer, CustomerResource> {
+public class CustomerResourceController extends AbstractController<Customer, CustomerResource> {
 	private final CustomerService customerService;
 	private final CustomerMapper customerMapper;
 
