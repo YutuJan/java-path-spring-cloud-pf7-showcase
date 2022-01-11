@@ -37,9 +37,4 @@ public class CustomerResourceController extends AbstractController<Customer, Cus
 		return ResponseEntity.ok(ApiResponse.<CustomerResource>builder()
 										 .data(customerMapper.toResource(customerService.findByEmail(email))).build());
 	}
-
-	//	@GetMapping(params = {"email"})
-	//	public ResponseEntity<ApiResponse<Customer>> findByEmail(@RequestParam String email) {
-	//		return ResponseEntity.ok(ApiResponse.<Customer>builder().data(customerService.findByEmail(email)).build());
-	//	}
 }
