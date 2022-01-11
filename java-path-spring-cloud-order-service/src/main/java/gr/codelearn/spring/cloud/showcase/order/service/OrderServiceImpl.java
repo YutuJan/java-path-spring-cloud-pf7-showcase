@@ -2,7 +2,9 @@ package gr.codelearn.spring.cloud.showcase.order.service;
 
 import gr.codelearn.spring.cloud.showcase.core.domain.PaymentMethod;
 import gr.codelearn.spring.cloud.showcase.core.service.BaseServiceImpl;
-import gr.codelearn.spring.cloud.showcase.order.domain.Coupon;
+import gr.codelearn.spring.cloud.showcase.core.transfer.resource.CouponResource;
+import gr.codelearn.spring.cloud.showcase.core.transfer.resource.CustomerResource;
+import gr.codelearn.spring.cloud.showcase.core.transfer.resource.ProductResource;
 import gr.codelearn.spring.cloud.showcase.order.domain.Order;
 import gr.codelearn.spring.cloud.showcase.order.domain.OrderItem;
 import gr.codelearn.spring.cloud.showcase.order.repository.OrderRepository;
@@ -27,12 +29,12 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 	}
 
 	@Override
-	public Order initiateOrder(Customer customer) {
-		return Order.builder().customer(customer).build();
+	public Order initiateOrder(CustomerResource customer) {
+		return Order.builder().email(customer.getEmail()).customerCategory(customer.getCustomerCategory()).build();
 	}
 
 	@Override
-	public void addItem(Order order, Product product, int quantity) {
+	public void addItem(Order order, ProductResource product, int quantity) {
 		if (checkNullability(order, product)) {
 			return;
 		}
@@ -55,7 +57,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 		logger.debug("Product[{}] added to Order[{}]", product, order);
 	}
 
-	private boolean checkNullability(Order order, Product product) {
+	private boolean checkNullability(Order order, ProductResource product) {
 		if (order == null) {
 			logger.warn("Order is null.");
 			return true;
@@ -68,7 +70,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 	}
 
 	@Override
-	public void updateItem(Order order, Product product, int quantity) {
+	public void updateItem(Order order, ProductResource product, int quantity) {
 		if (checkNullability(order, product)) {
 			return;
 		}
@@ -79,7 +81,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 		logger.debug("Product[{}] updated in Order[{}]", product, order);
 	}
 
-	private OrderItem newOrderItem(Order order, Product product, int quantity) {
+	private OrderItem newOrderItem(Order order, ProductResource product, int quantity) {
 		//@formatter:off
 		return OrderItem.builder()
 				.serial(product.getSerial())
@@ -92,7 +94,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 	}
 
 	@Override
-	public void deleteItem(Order order, Product product) {
+	public void deleteItem(Order order, ProductResource product) {
 		if (checkNullability(order, product)) {
 			return;
 		}
@@ -133,11 +135,13 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 				order.getCustomerCategory() != null;
 	}
 
-	private BigDecimal giveDiscount(Order order, Optional<Coupon> coupon) {
-		var totalDiscount = order.getCustomerCategory().getDiscount() + order.getPaymentMethod().getDiscount();
+	private BigDecimal giveDiscount(Order order, Optional<CouponResource> coupon) {
+		var totalDiscountPercent = order.getCustomerCategory().getDiscount() + order.getPaymentMethod().getDiscount();
+		var explicitDiscountAmount = BigDecimal.ZERO;
 
 		if (coupon.isPresent()) {
-			totalDiscount += coupon.get().getDiscountPercent();
+			totalDiscountPercent += coupon.get().getDiscountPercent();
+			explicitDiscountAmount = coupon.get().getDiscountAmount();
 		}
 
 		//@formatter:off
@@ -148,10 +152,12 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 		//@formatter:on
 
 		// Apply discounts
-		var costAfterDiscount = originalCost.multiply(BigDecimal.valueOf(1F - totalDiscount));
+		var costAfterDiscount = originalCost.multiply(BigDecimal.valueOf(1F - totalDiscountPercent));
+		costAfterDiscount = costAfterDiscount.subtract(explicitDiscountAmount);
 
-		logger.debug("Order[{}], originalCost: {}, totalDiscount: {}%, finalCost: {}.", order.getId(), originalCost,
-					 totalDiscount * 100, costAfterDiscount);
+		logger.debug("Order[{}], originalCost: {}, discountAmount: {}, totalDiscountPercent: {}%, finalCost: {}.",
+					 order.getId(), originalCost, explicitDiscountAmount, totalDiscountPercent * 100,
+					 costAfterDiscount);
 
 		return costAfterDiscount;
 	}

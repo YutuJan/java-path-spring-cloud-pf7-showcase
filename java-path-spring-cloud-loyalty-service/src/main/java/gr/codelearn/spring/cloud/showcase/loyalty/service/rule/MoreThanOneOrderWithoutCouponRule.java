@@ -1,13 +1,13 @@
 package gr.codelearn.spring.cloud.showcase.loyalty.service.rule;
 
-import gr.codelearn.spring.cloud.showcase.loyalty.domain.Order;
+import gr.codelearn.spring.cloud.showcase.core.transfer.resource.OrderResource;
 import gr.codelearn.spring.cloud.showcase.loyalty.service.OrderReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MoreThanOneOrderWithoutCouponRule implements Rule<Order> {
+public class MoreThanOneOrderWithoutCouponRule implements Rule<OrderResource> {
 	private final OrderReportService orderReportService;
 
 	@Override
@@ -16,9 +16,9 @@ public class MoreThanOneOrderWithoutCouponRule implements Rule<Order> {
 	}
 
 	@Override
-	public boolean matches(Order order) {
-		Long orderCount = orderReportService.countByCustomer(order.getCustomer().getEmail());
-		Long orderWithCoupon = orderReportService.countByCouponCodeIsNotNullAndCustomer(order.getCustomer().getEmail());
+	public boolean matches(OrderResource order) {
+		Long orderCount = orderReportService.countByCustomer(order.getEmail());
+		Long orderWithCoupon = orderReportService.countByCouponCodeIsNotNullAndCustomer(order.getEmail());
 
 		return orderCount > 1 && orderWithCoupon == 0;
 	}

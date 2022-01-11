@@ -1,8 +1,8 @@
 package gr.codelearn.spring.cloud.showcase.loyalty.service;
 
 import gr.codelearn.spring.cloud.showcase.core.base.AbstractLogComponent;
+import gr.codelearn.spring.cloud.showcase.core.transfer.resource.OrderResource;
 import gr.codelearn.spring.cloud.showcase.loyalty.domain.Coupon;
-import gr.codelearn.spring.cloud.showcase.loyalty.domain.Order;
 import gr.codelearn.spring.cloud.showcase.loyalty.service.rule.Rule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoyaltyServiceImpl extends AbstractLogComponent implements LoyaltyService {
 	private final CouponService couponService;
-	private final List<Rule<Order>> ruleList;
+	private final List<Rule<OrderResource>> ruleList;
 
 	@PostConstruct
 	public void init() {
@@ -30,7 +30,7 @@ public class LoyaltyServiceImpl extends AbstractLogComponent implements LoyaltyS
 	}
 
 	@Override
-	public Optional<Coupon> apply(Order order) {
+	public Optional<Coupon> apply(OrderResource order) {
 		Rule matchingRule = checkRules(order);
 
 		Coupon generatedCoupon = (matchingRule != null ? couponService.generate(matchingRule) : null);
@@ -44,7 +44,7 @@ public class LoyaltyServiceImpl extends AbstractLogComponent implements LoyaltyS
 		couponService.update(coupon);
 	}
 
-	private Rule checkRules(final Order order) {
+	private Rule checkRules(final OrderResource order) {
 		for (Rule rule : ruleList) {
 			if (rule.matches(order)) {
 				logger.debug("Rule {} matched order[{}] giving {}% discount and {} as fixed discount.",
