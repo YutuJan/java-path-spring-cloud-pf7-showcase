@@ -25,6 +25,7 @@
 
 	<!-- Modules -->
 	<modules>
+		<module>java-path-spring-cloud-infra-eureka-service</module>
 		<module>java-path-spring-cloud-app</module>
 		<module>java-path-spring-cloud-core</module>
 		<module>java-path-spring-cloud-catalog-service</module>
@@ -45,8 +46,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+		<!-- Spring Cloud active version -->
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
+
 		<!-- Library versions-->
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
+
 		<!--
 			Bump version due to https://spring.io/blog/2021/12/10/log4j2-vulnerability-and-spring-boot
 			https://unit42.paloaltonetworks.com/apache-log4j-vulnerability-cve-2021-44228/
@@ -73,6 +78,15 @@
 				<groupId>com.lmax</groupId>
 				<artifactId>disruptor</artifactId>
 				<version>${disruptor-maven-plugin.version}</version>
+			</dependency>
+
+			<!-- Spring Cloud specific -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
