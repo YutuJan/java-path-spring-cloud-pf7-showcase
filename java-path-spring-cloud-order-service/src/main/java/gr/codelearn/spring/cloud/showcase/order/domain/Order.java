@@ -68,11 +68,6 @@ public class Order extends BaseModel {
 	@Column(length = 10, nullable = false)
 	private CustomerCategory customerCategory;
 
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
-	private Date submitDate;
-
 	@JsonManagedReference("orderItems")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
@@ -88,6 +83,11 @@ public class Order extends BaseModel {
 	@NotNull
 	@Column(precision = 10, scale = 2, nullable = false)
 	private BigDecimal cost;
+
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
+	private Date submitDate;
 
 	@Column(length = 36)
 	private String couponCode;
