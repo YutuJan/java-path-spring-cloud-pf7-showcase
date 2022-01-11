@@ -24,3 +24,17 @@ spring:
         name: Constantinos Giannacoulis
     protocol: smtp
     test-connection: false
+  application:
+    name: catalog-service
+
+eureka:
+  client:
+    fetch-registry: true
+    refresh:
+      enable: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8100/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 30
+    instance-id: ${spring.application.name}-${random.value}
